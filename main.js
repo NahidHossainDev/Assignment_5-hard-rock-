@@ -14,7 +14,6 @@ async function fetchElement(api) {
 
 let array = [];
 const displayData = (data) => {
-    console.log(data);
     const display = document.getElementById('search-result');
     display.innerHTML = "";
     for (i = 0; i < 10; i++) {
@@ -24,14 +23,8 @@ const displayData = (data) => {
         console.log("id =", id, 'title =', title, "artistName =", artistName);
 
         const lyricsApi = 'https://api.lyrics.ovh/v1/' + artistName + "/" + title;
-        console.log(lyricsApi);
         fetchingLyric(id, lyricsApi);
 
-       
-        // const findingLyric = array.filter(id => array.id == id);
-        // console.log(findingLyric);
-        // const detail = { id, title, artistName };
-        // array.push(detail);
         display.innerHTML += `
                 <!-- single result -->
                 <div class="single-result row align-items-center my-3 p-3">
@@ -51,17 +44,12 @@ const displayData = (data) => {
                         <h2 class="text-success mb-4">${title}</h2>
                         <pre class="lyric text-white" id ="b${id}">
     Wont go whistling like the wind blows,
-    Looking out my window,
-    Just to see the shine
-    Maybe you might call it crazy,
-    How Im acting lately,
     </pre>
                         <button class="btn go-back" data-toggle="collapse" data-target="#a${id}">&lsaquo;</button>
                     </div>
                 </div>
                 <!-- ./ single result -->`;
     }
-    console.log(array);
 }
 
 function fetchingLyric(id, lyricsApi) {
@@ -78,16 +66,10 @@ function lyricShow(id) {
             break;
         }
     }
-    console.log("result =", lyric);
-    
-    // if (lyric == lyric.error) {
-    //     console.log("error");
-    // } else {
     if (lyric.lyrics == undefined) {
         lyric.lyrics = "Ops...! No lyrics found...!!!"
     }
         console.log(lyric.lyrics)
         const display = document.getElementById(`b${lyricId}`);
         display.innerText = lyric.lyrics;
-    // }
 }
